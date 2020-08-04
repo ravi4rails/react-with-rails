@@ -1,12 +1,12 @@
 class Api::V1::RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show destroy]
+
   def index
     recipe = resource_class.all.order(created_at: :desc)
     render json: recipe
   end
 
   def create
-    binding.pry
     @recipe = resource_class.new(recipe_params)
     if @recipe.save
       render json: @recipe
