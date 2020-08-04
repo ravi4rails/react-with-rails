@@ -6,16 +6,21 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def create
+    binding.pry
     @recipe = resource_class.new(recipe_params)
-    render json: @recipe if @recipe.save
-
-    render json: @recipe.errors
+    if @recipe.save
+      render json: @recipe
+    else
+      render json: @recipe.errors
+    end
   end
 
   def show
-    render json: @recipe if @recipe
-
-    render json: @recipe.errors
+    if @recipe
+      render json: @recipe
+    else
+      render json: @recipe.errors
+    end
   end
 
   def destroy
